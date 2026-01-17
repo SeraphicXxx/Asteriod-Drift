@@ -8,16 +8,9 @@ function gameLoop(time) {
     const deltaTime = time - lastTime;
     lastTime = time;
     ctx.save();
-    draw();   // from ui.js
-    update(time) // from ui.js
+    draw(time);   // from ui.js
     screenShake.update(deltaTime);
     screenShake.apply(ctx);
-    spawnAsteroids();
-    move();
-    updateAsteroids()
-    spaceship.update(canvas);
-    updateAsteroids();
-    updateExplosions();
     ctx.restore();
     requestAnimationFrame(gameLoop);
 }
