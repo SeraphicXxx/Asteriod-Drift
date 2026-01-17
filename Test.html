@@ -1,0 +1,91 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <title>Sprite Test</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    canvas {
+      border: 2px solid #fff;
+      background-color: #000;
+    }
+  </style>
+  </head>
+  <body>
+
+  <canvas id="spriteCanvas" width="600" height="400"></canvas>
+
+  <script>
+  const canvas = document.getElementById('spriteCanvas');
+  const ctx = canvas.getContext('2d');
+
+  // Sprite setup
+  const sprite = new Image();
+  sprite.src = './assets/spacesprite-die.png'; // Example sprite sheet URL
+
+  const SPRITE_WIDTH = 100;  // Width of one frame
+  const SPRITE_HEIGHT = 70; // Height of one frame
+  const TOTAL_FRAMES = 7;   // Number of frames in your sprite sheet
+  let currentFrame = 0;
+
+  let spriteX = 100; // position
+  let spriteY = 100;
+
+  // Animation speed
+  const frameSpeed = 4  ; // frames per second
+  let frameCounter = 0;
+
+  // Key controls
+  const keys = {};
+  window.addEventListener('keydown', (e) => keys[e.key] = true);
+  window.addEventListener('keyup', (e) => keys[e.key] = false);
+
+  function update() {
+      // Move sprite with arrow keys
+      if (keys['ArrowRight']) spriteX += 3;
+      if (keys['ArrowLeft']) spriteX -= 3;
+      if (keys['ArrowUp']) spriteY -= 3;
+      if (keys['ArrowDown']) spriteY += 3;
+
+      // Animate sprite
+      frameCounter++;
+      if (frameCounter >= frameSpeed) {
+          currentFrame = (currentFrame + 1) % TOTAL_FRAMES;
+          frameCounter = 0;
+      }
+  }
+
+  function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw sprite frame
+      ctx.drawImage(
+          sprite,
+          currentFrame * SPRITE_WIDTH, 0,  // source x, y
+          SPRITE_WIDTH, SPRITE_HEIGHT,    // source width, height
+          spriteX, spriteY,               // destination x, y
+          SPRITE_WIDTH, SPRITE_HEIGHT     // destination width, height
+      );
+  }
+
+  function gameLoop() {
+      update();
+      draw();
+      requestAnimationFrame(gameLoop);
+  }
+
+  // Wait until sprite is loaded to start animation
+  sprite.onload = () => {
+      gameLoop();
+  };
+  </script>
+
+  </body>
+  </html>
