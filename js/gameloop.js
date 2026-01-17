@@ -4,16 +4,15 @@ const screenShake = new ScreenShake();
 let lastTime = performance.now();
 
 function gameLoop(time) {
+  if (!gameRunning) return;
     const deltaTime = time - lastTime;
     lastTime = time;
-    if (!gameRunning) return;
     ctx.save();
-    update(time) // from ui.js
     draw();   // from ui.js
+    update(time) // from ui.js
     screenShake.update(deltaTime);
     screenShake.apply(ctx);
     spawnAsteroids();
-    drawGameUI();
     move();
     updateAsteroids()
     spaceship.update(canvas);

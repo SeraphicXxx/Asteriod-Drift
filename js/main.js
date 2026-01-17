@@ -11,12 +11,13 @@ startBtn.addEventListener("click", function() {
     menu.style.display = "none";
     canvas.style.display = "block";
 
-    
+
     initStars(); // from stars.js
     startIntro(); // from intro.js
     gameRunning = true; // global in gameLoop.js
     gameLoop(); // starts loop
 });
+
 
 function spawnAsteroids() {
   spawnTimer++;

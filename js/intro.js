@@ -1,7 +1,6 @@
 var showIntro = true;
 var introTimer = 0;
 var introDuration = 3000;
-
 function startIntro() {
     showIntro = true;
     introTimer = Date.now();
@@ -19,7 +18,7 @@ function drawIntro() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     drawStarfield(); // from stars.js
-
+    console.log("1");
     ctx.textAlign = "center";
     ctx.fillStyle = "#4da6ff";
     ctx.font = "bold 36px Orbitron";
