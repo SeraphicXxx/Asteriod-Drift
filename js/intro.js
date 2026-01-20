@@ -1,6 +1,6 @@
 var showIntro = true;
 var introTimer = 0;
-var introDuration = 3000;
+var introDuration = 2000;
 function startIntro() {
     showIntro = true;
     introTimer = Date.now();
@@ -9,6 +9,8 @@ function startIntro() {
 function isIntroActive() {
     if (showIntro && Date.now() - introTimer >= introDuration) {
         showIntro = false;
+        gameRunning = true;
+        startGameTimer();
     }
     return showIntro;
 }

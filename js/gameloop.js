@@ -4,13 +4,31 @@ const screenShake = new ScreenShake();
 let lastTime = performance.now();
 
 function gameLoop(time) {
-  if (!gameRunning) return;
     const deltaTime = time - lastTime;
     lastTime = time;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     ctx.save();
-    draw(time);   // from ui.js
     screenShake.update(deltaTime);
     screenShake.apply(ctx);
+
+    if (isGameOver) {
+        GameOver();
+        updateExplosions();
+        ctx.restore();
+        requestAnimationFrame(gameLoop);
+        return;
+    }
+
+    if (gameRunning) {
+        updateScore(); 
+        draw(time);
+        spawnAsteroids();
+        updateAsteroids();
+        updateExplosions();
+    }
+
     ctx.restore();
     requestAnimationFrame(gameLoop);
 }

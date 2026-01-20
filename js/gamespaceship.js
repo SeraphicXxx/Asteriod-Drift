@@ -1,6 +1,6 @@
 const explosionSprite = new Image();
 explosionSprite.src = "./assets/spacesprite-die.png";
-
+let isGameOver = false;
 
 class Spaceship {
       constructor(x, y) {
@@ -111,7 +111,7 @@ class Spaceship {
               explosions.push(new Explosion(this.x, this.y, this.scale));
               screenShake.start(14, 350);
 
-              console.log("Game Over");
+              isGameOver = true;
           }
         }
 
