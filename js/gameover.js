@@ -3,7 +3,7 @@ let highScore = 0;
 let gameStartTime = 0;
 
 const restartBtn = document.createElement("button");
-restartBtn.textContent = "Continue";
+restartBtn.textContent = "Restart";
 restartBtn.style.position = "absolute";
 restartBtn.style.left = "50%";
 restartBtn.style.top = "420px";
